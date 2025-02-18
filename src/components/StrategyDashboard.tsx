@@ -85,37 +85,92 @@ export const StrategyDashboard: React.FC = () => {
               <div>
                 <h3 className="section-subtitle">Budget Allocation</h3>
                 <ul className="list-container">
-                  <li>Daily budget: $20 per region</li>
-                  <li>Campaign duration: 15 days initial test phase</li>
-                  <li>Total investment: $600</li>
+                  <li>Total Daily Budget: $100</li>
+                  <li>South Asia Region: $35/day (India: $15, Bangladesh: $10, Nepal: $10)</li>
+                  <li>Africa Region: $45/day (Egypt: $10, Ghana: $8, Kenya: $8, Nigeria: $12, Libya: $7)</li>
+                  <li>Europe Region: $20/day (Austria: $10, Switzerland: $10)</li>
+                  <li>Campaign Duration: 15 days initial test phase</li>
+                  <li>Total Investment: $1,500</li>
                 </ul>
               </div>
             </div>
           </TabContent>
         )}
 
-        {activeTab === 'regions' && (
-          <TabContent title="Regional Strategy">
+        {activeTab === 'audience' && (
+          <TabContent title="Target Audience">
             <div className="space-y-6">
-              {Object.entries(regions).map(([key, region]) => (
-                <div key={key} className="bg-white p-4 rounded-lg shadow-sm">
-                  <h3 className="section-subtitle text-blue-600">{region.name}</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <h4 className="font-medium mb-2">Target Countries</h4>
-                      <ul className="list-disc pl-5 space-y-1">
-                        {region.countries.map(country => (
-                          <li key={country}>{country}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-medium mb-2">Strategic Focus</h4>
-                      <p className="text-gray-700">{region.focus}</p>
-                    </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <h3 className="section-subtitle text-blue-600">South Asia Demographics</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="font-medium mb-2">Target Profile</h4>
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li>Age: 17-25 (Undergraduate), 21-35 (Postgraduate)</li>
+                      <li>Education: Top 30% academic performers</li>
+                      <li>Language: Minimum IELTS 6.0 or equivalent</li>
+                      <li>Family Income: Middle to upper-middle class</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2">Key Interests</h4>
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li>STEM and Business programs</li>
+                      <li>Post-study work opportunities</li>
+                      <li>Career development</li>
+                      <li>International exposure</li>
+                    </ul>
                   </div>
                 </div>
-              ))}
+              </div>
+
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <h3 className="section-subtitle text-blue-600">African Markets</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="font-medium mb-2">Target Profile</h4>
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li>Age: 18-30 (Both levels)</li>
+                      <li>Education: Strong academic background</li>
+                      <li>Language: IELTS 6.0 or equivalent</li>
+                      <li>Background: Urban professionals and students</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2">Key Interests</h4>
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li>Business and Engineering programs</li>
+                      <li>Scholarship opportunities</li>
+                      <li>Industry connections</li>
+                      <li>UK work experience</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <h3 className="section-subtitle text-blue-600">European Focus</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="font-medium mb-2">Target Profile</h4>
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li>Age: 18-35 (Focus on postgraduate)</li>
+                      <li>Education: Bachelor's degree holders</li>
+                      <li>Language: B2 level English minimum</li>
+                      <li>Professional: Early to mid-career</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2">Key Interests</h4>
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li>Specialized master's programs</li>
+                      <li>Research opportunities</li>
+                      <li>Innovation and technology</li>
+                      <li>Industry partnerships</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </TabContent>
         )}
@@ -152,6 +207,66 @@ export const StrategyDashboard: React.FC = () => {
                   </div>
                 </div>
               </div>
+
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <h4 className="font-medium mb-2">Budget Distribution</h4>
+                <div className="grid gap-4">
+                  <div>
+                    <h5 className="font-medium text-blue-600">South Asia ($35/day)</h5>
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li>India: $15/day - Primary market focus</li>
+                      <li>Bangladesh: $10/day - Growing market</li>
+                      <li>Nepal: $10/day - Emerging market</li>
+                      <li>Expected CPM: $3-5</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5 className="font-medium text-blue-600">Africa ($45/day)</h5>
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li>Egypt: $10/day - Key North African market</li>
+                      <li>Nigeria: $12/day - Largest African market</li>
+                      <li>Ghana: $8/day - Growing West African market</li>
+                      <li>Kenya: $8/day - Key East African market</li>
+                      <li>Libya: $7/day - Developing market</li>
+                      <li>Expected CPM: $2-4</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5 className="font-medium text-blue-600">Europe ($20/day)</h5>
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li>Austria: $10/day - Premium market</li>
+                      <li>Switzerland: $10/day - Premium market</li>
+                      <li>Expected CPM: $6-8</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </TabContent>
+        )}
+
+        {activeTab === 'regions' && (
+          <TabContent title="Regional Strategy">
+            <div className="space-y-6">
+              {Object.entries(regions).map(([key, region]) => (
+                <div key={key} className="bg-white p-4 rounded-lg shadow-sm">
+                  <h3 className="section-subtitle text-blue-600">{region.name}</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <h4 className="font-medium mb-2">Target Countries</h4>
+                      <ul className="list-disc pl-5 space-y-1">
+                        {region.countries.map(country => (
+                          <li key={country}>{country}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-medium mb-2">Strategic Focus</h4>
+                      <p className="text-gray-700">{region.focus}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </TabContent>
         )}
