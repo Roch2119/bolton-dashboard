@@ -18,6 +18,24 @@ const TabContent: React.FC<TabContentProps> = ({ title, children }) => (
 export const StrategyDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
 
+  const regions = {
+    southAsia: {
+      name: "South Asia",
+      countries: ["India", "Bangladesh", "Nepal"],
+      focus: "Academic excellence, career opportunities, and affordable education"
+    },
+    africa: {
+      name: "Africa",
+      countries: ["Egypt", "Ghana", "Kenya", "Nigeria", "Libya"],
+      focus: "Industry partnerships, scholarships, and post-study opportunities"
+    },
+    europe: {
+      name: "Europe",
+      countries: ["Austria", "Switzerland"],
+      focus: "Research opportunities and specialized programs"
+    }
+  };
+
   const tabs = [
     { id: 'overview', label: 'Overview', icon: Target },
     { id: 'audience', label: 'Target Audience', icon: Users },
@@ -58,67 +76,18 @@ export const StrategyDashboard: React.FC = () => {
               <div>
                 <h3 className="section-subtitle">Campaign Objectives</h3>
                 <ul className="list-container">
-                  <li>Increase international student enrollment from Asia and Africa</li>
-                  <li>Build brand awareness in target regions</li>
-                  <li>Generate qualified leads through social media campaigns</li>
+                  <li>Increase international student enrollment from targeted regions: South Asia, Africa, and Europe</li>
+                  <li>Build brand awareness in 10 key countries across three regions</li>
+                  <li>Generate qualified leads through region-specific social media campaigns</li>
                   <li>Establish University of Bolton as a preferred UK study destination</li>
                 </ul>
               </div>
               <div>
                 <h3 className="section-subtitle">Budget Allocation</h3>
                 <ul className="list-container">
-                  <li>Daily budget: $40 ($20 per region)</li>
-                  <li>Campaign duration: 15 days</li>
+                  <li>Daily budget: $20 per region</li>
+                  <li>Campaign duration: 15 days initial test phase</li>
                   <li>Total investment: $600</li>
-                </ul>
-              </div>
-            </div>
-          </TabContent>
-        )}
-
-        {activeTab === 'audience' && (
-          <TabContent title="Target Audience">
-            <div className="grid-container">
-              <div>
-                <h3 className="section-subtitle">Asia Focus</h3>
-                <ul className="list-container">
-                  <li>Primary markets: India, Malaysia</li>
-                  <li>Age range: 17-30</li>
-                  <li>Education level: Secondary completion and above</li>
-                  <li>Interests: UK education, study abroad</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="section-subtitle">Africa Focus</h3>
-                <ul className="list-container">
-                  <li>Primary markets: Nigeria, Ghana</li>
-                  <li>Age range: 17-30</li>
-                  <li>Education level: Secondary completion and above</li>
-                  <li>Interests: UK education, study abroad</li>
-                </ul>
-              </div>
-            </div>
-          </TabContent>
-        )}
-
-        {activeTab === 'campaign' && (
-          <TabContent title="Campaign Structure">
-            <div className="space-y-4">
-              <div>
-                <h3 className="section-subtitle">Ad Variations</h3>
-                <ul className="list-container">
-                  <li>
-                    <span className="font-medium">Campus/Facilities Focus:</span>
-                    <br />Modern facilities, technology labs, and campus life
-                  </li>
-                  <li>
-                    <span className="font-medium">Career Outcomes Focus:</span>
-                    <br />Employment rates, industry partnerships, and career support
-                  </li>
-                  <li>
-                    <span className="font-medium">Student Testimonial Focus:</span>
-                    <br />Success stories from current international students
-                  </li>
                 </ul>
               </div>
             </div>
@@ -127,22 +96,61 @@ export const StrategyDashboard: React.FC = () => {
 
         {activeTab === 'regions' && (
           <TabContent title="Regional Strategy">
-            <div className="grid-container">
+            <div className="space-y-6">
+              {Object.entries(regions).map(([key, region]) => (
+                <div key={key} className="bg-white p-4 rounded-lg shadow-sm">
+                  <h3 className="section-subtitle text-blue-600">{region.name}</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <h4 className="font-medium mb-2">Target Countries</h4>
+                      <ul className="list-disc pl-5 space-y-1">
+                        {region.countries.map(country => (
+                          <li key={country}>{country}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-medium mb-2">Strategic Focus</h4>
+                      <p className="text-gray-700">{region.focus}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </TabContent>
+        )}
+
+        {activeTab === 'campaign' && (
+          <TabContent title="Campaign Structure">
+            <div className="space-y-4">
               <div>
-                <h3 className="section-subtitle">Asia Strategy</h3>
-                <ul className="list-container">
-                  <li>Expected daily reach: 2,000-3,000</li>
-                  <li>Estimated CPM: $5-7</li>
-                  <li>Focus: Academic excellence, facilities</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="section-subtitle">Africa Strategy</h3>
-                <ul className="list-container">
-                  <li>Expected daily reach: 3,000-4,000</li>
-                  <li>Estimated CPM: $3-5</li>
-                  <li>Focus: Affordability, career outcomes</li>
-                </ul>
+                <h3 className="section-subtitle">Regional Ad Variations</h3>
+                <div className="grid gap-4">
+                  <div className="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 className="font-medium mb-2">South Asia Campaign</h4>
+                    <ul className="list-disc pl-5 space-y-2">
+                      <li>Focus on academic excellence and career prospects</li>
+                      <li>Highlight affordable education compared to other UK universities</li>
+                      <li>Showcase successful alumni from the region</li>
+                    </ul>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 className="font-medium mb-2">Africa Campaign</h4>
+                    <ul className="list-disc pl-5 space-y-2">
+                      <li>Emphasize industry partnerships and job placement rates</li>
+                      <li>Feature scholarship opportunities and student support</li>
+                      <li>Highlight success stories from African graduates</li>
+                    </ul>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 className="font-medium mb-2">Europe Campaign</h4>
+                    <ul className="list-disc pl-5 space-y-2">
+                      <li>Focus on research opportunities and specialized programs</li>
+                      <li>Highlight cultural exchange and international environment</li>
+                      <li>Showcase facility excellence and innovation</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </TabContent>
@@ -154,19 +162,19 @@ export const StrategyDashboard: React.FC = () => {
               <div>
                 <h3 className="section-subtitle">Phase 1: Days 1-7</h3>
                 <ul className="list-container">
-                  <li>Launch all ad variations</li>
-                  <li>Monitor initial performance</li>
-                  <li>Gather engagement data</li>
-                  <li>Track regional performance</li>
+                  <li>Launch region-specific campaigns in all target countries</li>
+                  <li>Monitor initial performance metrics by country</li>
+                  <li>Track engagement rates across different regions</li>
+                  <li>Analyze cost variations between markets</li>
                 </ul>
               </div>
               <div>
                 <h3 className="section-subtitle">Phase 2: Days 8-15</h3>
                 <ul className="list-container">
-                  <li>Scale successful variations</li>
-                  <li>Optimize targeting</li>
-                  <li>Adjust messaging based on data</li>
-                  <li>Prepare for campaign expansion</li>
+                  <li>Scale successful variations by region</li>
+                  <li>Optimize targeting based on Week 1 data</li>
+                  <li>Adjust messaging for underperforming markets</li>
+                  <li>Prepare region-specific expansion plans</li>
                 </ul>
               </div>
             </div>
