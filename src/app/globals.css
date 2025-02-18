@@ -3,19 +3,45 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 243, 244, 246;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+@layer components {
+  .dashboard-tab {
+    @apply px-4 py-2 flex items-center gap-2 transition-colors;
+  }
+
+  .dashboard-tab.active {
+    @apply bg-blue-50 text-blue-600;
+  }
+
+  .dashboard-tab:hover:not(.active) {
+    @apply bg-gray-100;
+  }
+
+  .content-card {
+    @apply bg-white rounded-lg shadow-md p-6;
+  }
+
+  .section-title {
+    @apply text-xl font-semibold mb-4;
+  }
+
+  .section-subtitle {
+    @apply font-semibold mb-2;
+  }
+
+  .list-container {
+    @apply list-disc pl-5 space-y-2;
+  }
+
+  .grid-container {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
 }
