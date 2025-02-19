@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { BarChart, Target, Users, Globe, Calendar } from 'lucide-react';
+import { BarChart, Target, Users, Globe, Calendar, X } from 'lucide-react';
 
 /* --- Tab Content Component --- */
 interface TabContentProps {
@@ -16,18 +16,23 @@ const TabContent: React.FC<TabContentProps> = ({ title, children }) => (
   </div>
 );
 
-/* --- Global Notes Component --- */
+/* --- Notes Sidebar Component --- */
 interface Note {
   id: number;
   text: string;
 }
 
-const Notes: React.FC = () => {
+interface NotesSidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const NotesSidebar: React.FC<NotesSidebarProps> = ({ isOpen, onClose }) => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [newNote, setNewNote] = useState('');
 
   const handleAddNote = () => {
-    if (newNote.trim() === '') return;
+    if (!newNote.trim()) return;
     const note: Note = {
       id: Date.now(),
       text: newNote,
@@ -41,15 +46,24 @@ const Notes: React.FC = () => {
   };
 
   return (
-    <div className="notes-section mt-8 border-t pt-4">
-      <h2 className="text-2xl font-bold mb-4">Notes</h2>
+    <div
+      className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg p-4 transition-transform ${
+        isOpen ? 'translate-x-0' : 'translate-x-full'
+      }`}
+    >
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-bold">Notes</h2>
+        <button onClick={onClose}>
+          <X size={20} />
+        </button>
+      </div>
       <ul className="mb-4">
         {notes.map((note) => (
-          <li key={note.id} className="flex items-center justify-between mb-2">
+          <li key={note.id} className="flex justify-between items-center mb-2">
             <span>{note.text}</span>
             <button
               onClick={() => handleDeleteNote(note.id)}
-              className="text-red-500 ml-2"
+              className="text-red-500"
             >
               Delete
             </button>
@@ -77,8 +91,8 @@ const Notes: React.FC = () => {
 
 /* --- Strategy Dashboard Component --- */
 export const StrategyDashboard: React.FC = () => {
-  // Remove owner-only restrictions; Notes will be visible to everyone.
   const [activeTab, setActiveTab] = useState('overview');
+  const [notesOpen, setNotesOpen] = useState(false);
 
   const regions = {
     southAsia: {
@@ -109,7 +123,7 @@ export const StrategyDashboard: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto p-4">
+    <div className="max-w-7xl mx-auto p-4 relative">
       {/* Header */}
       <div className="bg-white rounded-lg shadow-md mb-6 overflow-hidden">
         <div className="bg-blue-600 text-white p-6">
@@ -139,7 +153,6 @@ export const StrategyDashboard: React.FC = () => {
         {activeTab === 'overview' && (
           <TabContent title="Campaign Overview">
             <div className="space-y-4">
-              {/* Campaign Objectives */}
               <div>
                 <h3 className="section-subtitle">Campaign Objectives</h3>
                 <ul className="list-container">
@@ -160,7 +173,6 @@ export const StrategyDashboard: React.FC = () => {
                   </li>
                 </ul>
               </div>
-              {/* Budget Allocation */}
               <div>
                 <h3 className="section-subtitle">Budget Allocation</h3>
                 <ul className="list-container">
@@ -275,43 +287,25 @@ export const StrategyDashboard: React.FC = () => {
                   <div className="bg-white p-4 rounded-lg shadow-sm">
                     <h4 className="font-medium mb-2">South Asia Campaign</h4>
                     <ul className="list-disc pl-5 space-y-2">
-                      <li>
-                        Focus on academic excellence and career prospects
-                      </li>
-                      <li>
-                        Highlight affordable education compared to other UK universities
-                      </li>
-                      <li>
-                        Showcase successful alumni from the region
-                      </li>
+                      <li>Focus on academic excellence and career prospects</li>
+                      <li>Highlight affordable education compared to other UK universities</li>
+                      <li>Showcase successful alumni from the region</li>
                     </ul>
                   </div>
                   <div className="bg-white p-4 rounded-lg shadow-sm">
                     <h4 className="font-medium mb-2">Africa Campaign</h4>
                     <ul className="list-disc pl-5 space-y-2">
-                      <li>
-                        Emphasize industry partnerships and job placement rates
-                      </li>
-                      <li>
-                        Feature scholarship opportunities and student support
-                      </li>
-                      <li>
-                        Highlight success stories from African graduates
-                      </li>
+                      <li>Emphasize industry partnerships and job placement rates</li>
+                      <li>Feature scholarship opportunities and student support</li>
+                      <li>Highlight success stories from African graduates</li>
                     </ul>
                   </div>
                   <div className="bg-white p-4 rounded-lg shadow-sm">
                     <h4 className="font-medium mb-2">Europe Campaign</h4>
                     <ul className="list-disc pl-5 space-y-2">
-                      <li>
-                        Focus on research opportunities and specialized programs
-                      </li>
-                      <li>
-                        Highlight cultural exchange and international environment
-                      </li>
-                      <li>
-                        Showcase facility excellence and innovation
-                      </li>
+                      <li>Focus on research opportunities and specialized programs</li>
+                      <li>Highlight cultural exchange and international environment</li>
+                      <li>Showcase facility excellence and innovation</li>
                     </ul>
                   </div>
                 </div>
@@ -321,9 +315,7 @@ export const StrategyDashboard: React.FC = () => {
                 <h4 className="font-medium mb-2">Budget Distribution</h4>
                 <div className="grid gap-4">
                   <div>
-                    <h5 className="font-medium text-blue-600">
-                      South Asia ($35/day)
-                    </h5>
+                    <h5 className="font-medium text-blue-600">South Asia ($35/day)</h5>
                     <ul className="list-disc pl-5 space-y-1">
                       <li>India: $15/day - Primary market focus</li>
                       <li>Bangladesh: $10/day - Growing market</li>
@@ -332,9 +324,7 @@ export const StrategyDashboard: React.FC = () => {
                     </ul>
                   </div>
                   <div>
-                    <h5 className="font-medium text-blue-600">
-                      Africa ($45/day)
-                    </h5>
+                    <h5 className="font-medium text-blue-600">Africa ($45/day)</h5>
                     <ul className="list-disc pl-5 space-y-1">
                       <li>Egypt: $10/day - Key North African market</li>
                       <li>Nigeria: $12/day - Largest African market</li>
@@ -345,9 +335,7 @@ export const StrategyDashboard: React.FC = () => {
                     </ul>
                   </div>
                   <div>
-                    <h5 className="font-medium text-blue-600">
-                      Europe ($20/day)
-                    </h5>
+                    <h5 className="font-medium text-blue-600">Europe ($20/day)</h5>
                     <ul className="list-disc pl-5 space-y-1">
                       <li>Austria: $10/day - Premium market</li>
                       <li>Switzerland: $10/day - Premium market</li>
@@ -412,8 +400,16 @@ export const StrategyDashboard: React.FC = () => {
         )}
       </div>
 
-      {/* --- Global Notes Section (Visible to Everyone) --- */}
-      <Notes />
+      {/* Toggle Notes Button */}
+      <button
+        onClick={() => setNotesOpen(!notesOpen)}
+        className="fixed bottom-4 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg"
+      >
+        {notesOpen ? 'Close Notes' : 'Open Notes'}
+      </button>
+
+      {/* Notes Sidebar */}
+      <NotesSidebar isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
     </div>
   );
 };
