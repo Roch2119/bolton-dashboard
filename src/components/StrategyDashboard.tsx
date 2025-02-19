@@ -3,37 +3,95 @@
 import React, { useState } from 'react';
 import { BarChart, Target, Users, Globe, Calendar } from 'lucide-react';
 
+/* --- Minimal Commenting System --- */
+interface Comment {
+  id: number;
+  text: string;
+}
+
+interface CommentsProps {
+  sectionId: string;
+}
+
+const Comments: React.FC<CommentsProps> = ({ sectionId }) => {
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [newComment, setNewComment] = useState('');
+
+  const handleAddComment = () => {
+    if (newComment.trim() === '') return;
+    const comment: Comment = {
+      id: Date.now(),
+      text: newComment,
+    };
+    setComments([...comments, comment]);
+    setNewComment('');
+  };
+
+  return (
+    <div className="comments mt-4 border-t pt-4">
+      <h3 className="font-semibold mb-2">Comments</h3>
+      <ul className="mb-2">
+        {comments.map((comment) => (
+          <li key={comment.id} className="mb-1">
+            {comment.text}
+          </li>
+        ))}
+      </ul>
+      <div className="flex">
+        <input
+          type="text"
+          placeholder="Add a comment..."
+          className="flex-grow border p-2 rounded-l"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+        />
+        <button
+          onClick={handleAddComment}
+          className="bg-blue-500 text-white p-2 rounded-r"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  );
+};
+
+/* --- Tab Content Component with Comments --- */
 interface TabContentProps {
   title: string;
+  sectionId: string;
   children: React.ReactNode;
 }
 
-const TabContent: React.FC<TabContentProps> = ({ title, children }) => (
+const TabContent: React.FC<TabContentProps> = ({ title, sectionId, children }) => (
   <div className="content-card">
     <h2 className="section-title">{title}</h2>
     {children}
+    {/* Render comments for this section */}
+    <Comments sectionId={sectionId} />
   </div>
 );
 
+/* --- Strategy Dashboard Component --- */
 export const StrategyDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
 
   const regions = {
     southAsia: {
-      name: "South Asia",
-      countries: ["India", "Bangladesh", "Nepal"],
-      focus: "Academic excellence, career opportunities, and affordable education"
+      name: 'South Asia',
+      countries: ['India', 'Bangladesh', 'Nepal'],
+      focus: 'Academic excellence, career opportunities, and affordable education',
     },
     africa: {
-      name: "Africa",
-      countries: ["Egypt", "Ghana", "Kenya", "Nigeria", "Libya"],
-      focus: "Industry partnerships, scholarships, and post-study opportunities"
+      name: 'Africa',
+      countries: ['Egypt', 'Ghana', 'Kenya', 'Nigeria', 'Libya'],
+      focus: 'Industry partnerships, scholarships, and post-study opportunities',
     },
     europe: {
-      name: "Europe",
-      countries: ["Austria", "Switzerland"],
-      focus: "Research opportunities and specialized programs"
-    }
+      name: 'Europe',
+      countries: ['Austria', 'Switzerland'],
+      focus: 'Research opportunities and specialized programs',
+    },
   };
 
   const tabs = [
@@ -49,7 +107,9 @@ export const StrategyDashboard: React.FC = () => {
       {/* Header */}
       <div className="bg-white rounded-lg shadow-md mb-6 overflow-hidden">
         <div className="bg-blue-600 text-white p-6">
-          <h1 className="text-2xl font-bold">International Student Recruitment Strategy</h1>
+          <h1 className="text-2xl font-bold">
+            International Student Recruitment Strategy
+          </h1>
           <p className="text-gray-100">University of Greater Manchester</p>
         </div>
       </div>
@@ -71,23 +131,38 @@ export const StrategyDashboard: React.FC = () => {
       {/* Content */}
       <div className="space-y-6">
         {activeTab === 'overview' && (
-          <TabContent title="Campaign Overview">
+          <TabContent title="Campaign Overview" sectionId="overview">
             <div className="space-y-4">
               <div>
                 <h3 className="section-subtitle">Campaign Objectives</h3>
                 <ul className="list-container">
-                  <li>Increase international student enrollment from targeted regions: South Asia, Africa, and Europe</li>
-                  <li>Build brand awareness in 10 key countries across three regions</li>
-                  <li>Generate qualified leads through region-specific social media campaigns</li>
-                  <li>Establish University of Greater Manchester as a preferred UK study destination</li>
+                  <li>
+                    Increase international student enrollment from targeted regions:
+                    South Asia, Africa, and Europe
+                  </li>
+                  <li>
+                    Build brand awareness in 10 key countries across three regions
+                  </li>
+                  <li>
+                    Generate qualified leads through region-specific social media campaigns
+                  </li>
+                  <li>
+                    Establish University of Greater Manchester as a preferred UK study
+                    destination
+                  </li>
                 </ul>
               </div>
               <div>
                 <h3 className="section-subtitle">Budget Allocation</h3>
                 <ul className="list-container">
                   <li>Total Daily Budget: $100</li>
-                  <li>South Asia Region: $35/day (India: $15, Bangladesh: $10, Nepal: $10)</li>
-                  <li>Africa Region: $45/day (Egypt: $10, Ghana: $8, Kenya: $8, Nigeria: $12, Libya: $7)</li>
+                  <li>
+                    South Asia Region: $35/day (India: $15, Bangladesh: $10, Nepal: $10)
+                  </li>
+                  <li>
+                    Africa Region: $45/day (Egypt: $10, Ghana: $8, Kenya: $8, Nigeria: $12,
+                    Libya: $7)
+                  </li>
                   <li>Europe Region: $20/day (Austria: $10, Switzerland: $10)</li>
                   <li>Campaign Duration: 15 days initial test phase</li>
                   <li>Total Investment: $1,500</li>
@@ -98,7 +173,7 @@ export const StrategyDashboard: React.FC = () => {
         )}
 
         {activeTab === 'audience' && (
-          <TabContent title="Target Audience">
+          <TabContent title="Target Audience" sectionId="audience">
             <div className="space-y-6">
               <div className="bg-white p-4 rounded-lg shadow-sm">
                 <h3 className="section-subtitle text-blue-600">South Asia Demographics</h3>
@@ -176,7 +251,7 @@ export const StrategyDashboard: React.FC = () => {
         )}
 
         {activeTab === 'campaign' && (
-          <TabContent title="Campaign Structure">
+          <TabContent title="Campaign Structure" sectionId="campaign">
             <div className="space-y-4">
               <div>
                 <h3 className="section-subtitle">Regional Ad Variations</h3>
@@ -185,7 +260,9 @@ export const StrategyDashboard: React.FC = () => {
                     <h4 className="font-medium mb-2">South Asia Campaign</h4>
                     <ul className="list-disc pl-5 space-y-2">
                       <li>Focus on academic excellence and career prospects</li>
-                      <li>Highlight affordable education compared to other UK universities</li>
+                      <li>
+                        Highlight affordable education compared to other UK universities
+                      </li>
                       <li>Showcase successful alumni from the region</li>
                     </ul>
                   </div>
@@ -212,7 +289,9 @@ export const StrategyDashboard: React.FC = () => {
                 <h4 className="font-medium mb-2">Budget Distribution</h4>
                 <div className="grid gap-4">
                   <div>
-                    <h5 className="font-medium text-blue-600">South Asia ($35/day)</h5>
+                    <h5 className="font-medium text-blue-600">
+                      South Asia ($35/day)
+                    </h5>
                     <ul className="list-disc pl-5 space-y-1">
                       <li>India: $15/day - Primary market focus</li>
                       <li>Bangladesh: $10/day - Growing market</li>
@@ -246,7 +325,7 @@ export const StrategyDashboard: React.FC = () => {
         )}
 
         {activeTab === 'regions' && (
-          <TabContent title="Regional Strategy">
+          <TabContent title="Regional Strategy" sectionId="regions">
             <div className="space-y-6">
               {Object.entries(regions).map(([key, region]) => (
                 <div key={key} className="bg-white p-4 rounded-lg shadow-sm">
@@ -255,7 +334,7 @@ export const StrategyDashboard: React.FC = () => {
                     <div>
                       <h4 className="font-medium mb-2">Target Countries</h4>
                       <ul className="list-disc pl-5 space-y-1">
-                        {region.countries.map(country => (
+                        {region.countries.map((country) => (
                           <li key={country}>{country}</li>
                         ))}
                       </ul>
@@ -272,7 +351,7 @@ export const StrategyDashboard: React.FC = () => {
         )}
 
         {activeTab === 'timeline' && (
-          <TabContent title="Campaign Timeline">
+          <TabContent title="Campaign Timeline" sectionId="timeline">
             <div className="space-y-4">
               <div>
                 <h3 className="section-subtitle">Phase 1: Days 1-7</h3>
