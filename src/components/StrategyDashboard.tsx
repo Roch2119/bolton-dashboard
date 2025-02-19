@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { BarChart, Target, Users, Globe, Calendar, FileCheck } from 'lucide-react';
+import { BarChart, Target, Users, Globe, Calendar } from 'lucide-react';
 import TabContent from './TabContents';
 import NotesSidebar from './NotesSidebar';
 
@@ -33,7 +33,6 @@ export const StrategyDashboard: React.FC = () => {
     { id: 'campaign', label: 'Campaign', icon: BarChart },
     { id: 'regions', label: 'Regions', icon: Globe },
     { id: 'timeline', label: 'Timeline', icon: Calendar },
-    { id: 'requirements', label: 'Requirements', icon: FileCheck },
   ];
 
   return (
@@ -306,115 +305,6 @@ export const StrategyDashboard: React.FC = () => {
                   <li>Adjust messaging for underperforming markets</li>
                   <li>Prepare region-specific expansion plans</li>
                 </ul>
-              </div>
-            </div>
-          </TabContent>
-         )} 
-        {activeTab === 'requirements' && (
-          <TabContent title="Campaign Requirements">
-            <div className="space-y-6">
-              {/* Facebook Ad Requirements */}
-              <div className="bg-white p-4 rounded-lg shadow-sm">
-                <h3 className="section-subtitle text-blue-600">Facebook Ad Requirements</h3>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium mb-2">Image Specifications</h4>
-                    <ul className="list-disc pl-5 space-y-2">
-                      <li>Primary Text: 125 characters recommended
-                        <ul className="list-circle pl-5 mt-1 space-y-1 text-gray-600">
-                          <li>Include clear call-to-action</li>
-                          <li>Highlight key program benefits</li>
-                          <li>Mention application deadlines</li>
-                        </ul>
-                      </li>
-                      <li>Image Requirements:
-                        <ul className="list-circle pl-5 mt-1 space-y-1 text-gray-600">
-                          <li>Resolution: 1080 x 1080px (square)</li>
-                          <li>Format: JPG or PNG</li>
-                          <li>Text overlay: Less than 20% of image</li>
-                          <li>File size: Under 30MB</li>
-                        </ul>
-                      </li>
-                      <li>Video Requirements:
-                        <ul className="list-circle pl-5 mt-1 space-y-1 text-gray-600">
-                          <li>Duration: 15-60 seconds</li>
-                          <li>Format: MP4, MOV</li>
-                          <li>Resolution: 1080p minimum</li>
-                          <li>Captions: Required</li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Content Requirements */}
-              <div className="bg-white p-4 rounded-lg shadow-sm">
-                <h3 className="section-subtitle text-blue-600">Content Requirements</h3>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium mb-2">Required Assets</h4>
-                    <ul className="list-disc pl-5 space-y-2">
-                      <li>From Marketing Team:
-                        <ul className="list-circle pl-5 mt-1 space-y-1 text-gray-600">
-                          <li>University brand guidelines</li>
-                          <li>Approved logo files</li>
-                          <li>Brand color codes</li>
-                          <li>Official fonts</li>
-                        </ul>
-                      </li>
-                      <li>From Academic Departments:
-                        <ul className="list-circle pl-5 mt-1 space-y-1 text-gray-600">
-                          <li>Course catalogs (PDF format)</li>
-                          <li>Program highlights</li>
-                          <li>Faculty profiles</li>
-                          <li>Research highlights</li>
-                        </ul>
-                      </li>
-                      <li>From Student Services:
-                        <ul className="list-circle pl-5 mt-1 space-y-1 text-gray-600">
-                          <li>Accommodation details</li>
-                          <li>Support services information</li>
-                          <li>International student guides</li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Technical Setup */}
-              <div className="bg-white p-4 rounded-lg shadow-sm">
-                <h3 className="section-subtitle text-blue-600">Technical Setup</h3>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium mb-2">Facebook Campaign Setup</h4>
-                    <ul className="list-disc pl-5 space-y-2">
-                      <li>Account Access:
-                        <ul className="list-circle pl-5 mt-1 space-y-1 text-gray-600">
-                          <li>Business Manager access</li>
-                          <li>Ad account permissions</li>
-                          <li>Facebook pixel installation</li>
-                        </ul>
-                      </li>
-                      <li>Tracking Requirements:
-                        <ul className="list-circle pl-5 mt-1 space-y-1 text-gray-600">
-                          <li>Conversion tracking setup</li>
-                          <li>UTM parameter structure</li>
-                          <li>Custom audience creation</li>
-                        </ul>
-                      </li>
-                      <li>Landing Pages:
-                        <ul className="list-circle pl-5 mt-1 space-y-1 text-gray-600">
-                          <li>Mobile-responsive design</li>
-                          <li>Fast loading time (under 3s)</li>
-                          <li>Clear call-to-action</li>
-                          <li>Form integration</li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
               </div>
             </div>
           </TabContent>
