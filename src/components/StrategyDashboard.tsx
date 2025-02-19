@@ -36,11 +36,11 @@ export const StrategyDashboard: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto p-4 relative">
+    <div className="max-w-7xl mx-auto p-4 sm:p-6 relative">
       {/* Header */}
       <div className="bg-white rounded-lg shadow-md mb-6 overflow-hidden">
         <div className="bg-blue-600 text-white p-6">
-          <h1 className="text-2xl font-bold">
+          <h1 className="text-2xl sm:text-3xl font-bold">
             International Student Recruitment Strategy
           </h1>
           <p className="text-gray-100">University of Greater Manchester</p>
@@ -48,15 +48,16 @@ export const StrategyDashboard: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex mb-6 bg-white rounded-lg shadow-sm">
+      <div className="flex flex-wrap mb-6 bg-white rounded-lg shadow-sm">
         {tabs.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
             onClick={() => setActiveTab(id)}
-            className={`dashboard-tab ${activeTab === id ? 'active' : ''}`}
+            aria-label={label}
+            className={`dashboard-tab ${activeTab === id ? 'active' : ''} flex items-center gap-1 p-2 sm:p-3`}
           >
             <Icon size={16} />
-            {label}
+            <span className="text-xs sm:text-sm">{label}</span>
           </button>
         ))}
       </div>
@@ -313,7 +314,8 @@ export const StrategyDashboard: React.FC = () => {
       {/* Toggle Notes Button */}
       <button
         onClick={() => setNotesOpen(!notesOpen)}
-        className="fixed bottom-4 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg"
+        aria-label={notesOpen ? 'Close Notes' : 'Open Notes'}
+        className="fixed bottom-4 right-4 bg-blue-600 text-white p-3 sm:p-4 rounded-full shadow-lg"
       >
         {notesOpen ? 'Close Notes' : 'Open Notes'}
       </button>
