@@ -1,95 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { BarChart, Target, Users, Globe, Calendar, X } from 'lucide-react';
+import { BarChart, Target, Users, Globe, Calendar } from 'lucide-react';
+import TabContent from './TabContents';
+import NotesSidebar from './NotesSidebar';
 
-/* --- Tab Content Component --- */
-interface TabContentProps {
-  title: string;
-  children: React.ReactNode;
-}
-
-const TabContent: React.FC<TabContentProps> = ({ title, children }) => (
-  <div className="content-card">
-    <h2 className="section-title">{title}</h2>
-    {children}
-  </div>
-);
-
-/* --- Notes Sidebar Component --- */
-interface Note {
-  id: number;
-  text: string;
-}
-
-interface NotesSidebarProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const NotesSidebar: React.FC<NotesSidebarProps> = ({ isOpen, onClose }) => {
-  const [notes, setNotes] = useState<Note[]>([]);
-  const [newNote, setNewNote] = useState('');
-
-  const handleAddNote = () => {
-    if (!newNote.trim()) return;
-    const note: Note = {
-      id: Date.now(),
-      text: newNote,
-    };
-    setNotes([...notes, note]);
-    setNewNote('');
-  };
-
-  const handleDeleteNote = (id: number) => {
-    setNotes(notes.filter((note) => note.id !== id));
-  };
-
-  return (
-    <div
-      className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg p-4 transition-transform ${
-        isOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}
-    >
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold">Notes</h2>
-        <button onClick={onClose}>
-          <X size={20} />
-        </button>
-      </div>
-      <ul className="mb-4">
-        {notes.map((note) => (
-          <li key={note.id} className="flex justify-between items-center mb-2">
-            <span>{note.text}</span>
-            <button
-              onClick={() => handleDeleteNote(note.id)}
-              className="text-red-500"
-            >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
-      <div className="flex">
-        <input
-          type="text"
-          placeholder="Add a note..."
-          value={newNote}
-          onChange={(e) => setNewNote(e.target.value)}
-          className="flex-grow border p-2 rounded-l"
-        />
-        <button
-          onClick={handleAddNote}
-          className="bg-blue-500 text-white p-2 rounded-r"
-        >
-          Add
-        </button>
-      </div>
-    </div>
-  );
-};
-
-/* --- Strategy Dashboard Component --- */
 export const StrategyDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [notesOpen, setNotesOpen] = useState(false);
@@ -98,14 +13,12 @@ export const StrategyDashboard: React.FC = () => {
     southAsia: {
       name: 'South Asia',
       countries: ['India', 'Bangladesh', 'Nepal'],
-      focus:
-        'Academic excellence, career opportunities, and affordable education',
+      focus: 'Academic excellence, career opportunities, and affordable education',
     },
     africa: {
       name: 'Africa',
       countries: ['Egypt', 'Ghana', 'Kenya', 'Nigeria', 'Libya'],
-      focus:
-        'Industry partnerships, scholarships, and post-study opportunities',
+      focus: 'Industry partnerships, scholarships, and post-study opportunities',
     },
     europe: {
       name: 'Europe',
@@ -157,19 +70,16 @@ export const StrategyDashboard: React.FC = () => {
                 <h3 className="section-subtitle">Campaign Objectives</h3>
                 <ul className="list-container">
                   <li>
-                    Increase international student enrollment from targeted
-                    regions: South Asia, Africa, and Europe
+                    Increase international student enrollment from targeted regions: South Asia, Africa, and Europe
                   </li>
                   <li>
                     Build brand awareness in 10 key countries across three regions
                   </li>
                   <li>
-                    Generate qualified leads through region-specific social media
-                    campaigns
+                    Generate qualified leads through region-specific social media campaigns
                   </li>
                   <li>
-                    Establish University of Greater Manchester as a preferred UK
-                    study destination
+                    Establish University of Greater Manchester as a preferred UK study destination
                   </li>
                 </ul>
               </div>
