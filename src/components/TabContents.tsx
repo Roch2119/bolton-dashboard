@@ -8,9 +8,11 @@ export interface TabContentProps {
 }
 
 const TabContent: React.FC<TabContentProps> = ({ title, children }) => (
-  <div className="content-card">
-    <h2 className="section-title">{title}</h2>
-    {children}
+  <div className="bg-white rounded-lg shadow-sm p-3 sm:p-6">
+    <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 sm:mb-6">{title}</h2>
+    <div className="space-y-4">
+      {children}
+    </div>
   </div>
 );
 
