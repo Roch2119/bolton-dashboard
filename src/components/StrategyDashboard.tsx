@@ -50,7 +50,7 @@ export const StrategyDashboard: React.FC = () => {
       <div className="bg-white rounded-lg shadow-md mb-6 overflow-hidden">
         <div className="bg-blue-600 text-white p-6">
           <h1 className="text-2xl font-bold">International Student Recruitment Strategy</h1>
-          <p className="text-gray-100">University of Bolton</p>
+          <p className="text-gray-100">University of Greater Manchester</p>
         </div>
       </div>
 
@@ -79,7 +79,7 @@ export const StrategyDashboard: React.FC = () => {
                   <li>Increase international student enrollment from targeted regions: South Asia, Africa, and Europe</li>
                   <li>Build brand awareness in 10 key countries across three regions</li>
                   <li>Generate qualified leads through region-specific social media campaigns</li>
-                  <li>Establish University of Bolton as a preferred UK study destination</li>
+                  <li>Establish University of Greater Manchester as a preferred UK study destination</li>
                 </ul>
               </div>
               <div>
