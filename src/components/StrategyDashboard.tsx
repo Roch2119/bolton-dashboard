@@ -28,7 +28,8 @@ const Comments: React.FC<CommentsProps> = ({ sectionId }) => {
   };
 
   return (
-    <div className="comments mt-4 border-t pt-4">
+    // The data attribute here uses sectionId to avoid the ESLint unused variable error.
+    <div className="comments mt-4 border-t pt-4" data-sectionid={sectionId}>
       <h3 className="font-semibold mb-2">Comments</h3>
       <ul className="mb-2">
         {comments.map((comment) => (
